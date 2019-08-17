@@ -8,7 +8,7 @@ import {
   GET_SHOP_FAIL
 } from "../actions/getShops";
 
-type GetShopsState = {
+export type GetShopsState = {
   list: any[];
   isLoading: boolean;
   error?: AxiosError | null;
@@ -27,6 +27,7 @@ const shopData: Reducer<GetShopsState, GetShopsActionType> = (
       };
 
     case GET_SHOP_SUCCEED:
+      console.log(action);
       return {
         ...state,
         list: action.payload.result.list,
