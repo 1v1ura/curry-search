@@ -1,4 +1,7 @@
 import React, { FC } from "react";
+import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 export type SerachFormProps = {
   searchText: string;
@@ -11,8 +14,8 @@ export type SerachFormProps = {
 const SerachForm: FC<SerachFormProps> = props => {
   const { searchText, changeSerachText } = props;
 
-  const onChangeText = (e: React.FormEvent<HTMLInputElement>) => {
-    changeSerachText(e.currentTarget.value);
+  const onChangeText = (newValue: string) => {
+    changeSerachText(newValue);
   };
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,12 +26,24 @@ const SerachForm: FC<SerachFormProps> = props => {
   return (
     <>
       <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => submitForm(e)}>
-        <input
-          type="text"
+        <TextField
+          id="outlined-full-width"
+          label="Search Area"
+          placeholder="input area name"
+          fullWidth
+          margin="normal"
+          variant="outlined"
+          InputLabelProps={{
+            shrink: true
+          }}
           value={searchText}
-          onChange={(e: React.FormEvent<HTMLInputElement>) => onChangeText(e)}
+          onChange={e => onChangeText(e.target.value)}
         />
-        <button type="submit">検索</button>
+        <Box display="flex" flexDirection="row-reverse">
+          <Button variant="contained" color="primary" type="submit">
+            Search
+          </Button>
+        </Box>
       </form>
     </>
   );
