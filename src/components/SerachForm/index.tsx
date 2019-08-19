@@ -1,21 +1,23 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 
 export type SerachFormProps = {
+  searchText: string;
   formatted_address: string;
   isLoading: boolean;
   getGeocodeStart: (serachArea: string) => void;
+  changeSerachText: (area: string) => void;
 };
 
 const SerachForm: FC<SerachFormProps> = props => {
-  const [serchText, setSerchText] = useState("");
+  const { searchText, changeSerachText } = props;
 
   const onChangeText = (e: React.FormEvent<HTMLInputElement>) => {
-    setSerchText(e.currentTarget.value);
+    changeSerachText(e.currentTarget.value);
   };
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    props.getGeocodeStart(serchText);
+    props.getGeocodeStart(searchText);
   };
 
   return (
@@ -23,7 +25,7 @@ const SerachForm: FC<SerachFormProps> = props => {
       <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => submitForm(e)}>
         <input
           type="text"
-          value={serchText}
+          value={searchText}
           onChange={(e: React.FormEvent<HTMLInputElement>) => onChangeText(e)}
         />
         <button type="submit">検索</button>

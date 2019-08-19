@@ -1,5 +1,12 @@
 import { combineReducers } from "redux";
-import shopData from "./getShops";
+import shopsData from "./getShops";
+import shopData from "./getShop";
 import geoCodeData from "./getGeocode";
+import searchText from "./serchText";
 
-export default combineReducers({ shopData, geoCodeData });
+export default combineReducers({
+  shopsData,
+  shopData,
+  geoCodeData,
+  searchText
+});

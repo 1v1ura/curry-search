@@ -3,9 +3,9 @@ import { AxiosError } from "axios";
 
 import {
   GetShopsActionType,
-  GET_SHOP_START,
-  GET_SHOP_SUCCEED,
-  GET_SHOP_FAIL
+  GET_SHOPS_START,
+  GET_SHOPS_SUCCEED,
+  GET_SHOPS_FAIL
 } from "../actions/getShops";
 
 export type GetShopsState = {
@@ -19,24 +19,24 @@ const shopData: Reducer<GetShopsState, GetShopsActionType> = (
   action: GetShopsActionType
 ): GetShopsState => {
   switch (action.type) {
-    case GET_SHOP_START:
+    case GET_SHOPS_START:
       return {
         ...state,
         list: [],
         isLoading: true
       };
 
-    case GET_SHOP_SUCCEED:
-      console.log(action);
+    case GET_SHOPS_SUCCEED:
       return {
         ...state,
         list: action.payload.result.list,
         isLoading: false
       };
 
-    case GET_SHOP_FAIL:
+    case GET_SHOPS_FAIL:
       return {
         ...state,
+        list: [],
         isLoading: false,
         error: action.payload.error
       };

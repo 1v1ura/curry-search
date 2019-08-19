@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import getShopsFactory from "../../domain/gurunavi";
+import { getShopsFactory, getShopFactory } from "../../domain/gurunavi";
 
-import { getShops, GetShopList, GET_SHOP_START } from "../../actions/getShops";
+import { getShops, GetShopList, GET_SHOPS_START } from "../../actions/getShops";
+import { getShop, GetShop, GET_SHOP_START } from "../../actions/getShop";
 
+// get shop list ...
 function* runGetShopList(action: ReturnType<typeof getShops.start>) {
-  yield console.log("runGetShopList");
-
   const { location } = action.payload.params;
   const api = getShopsFactory();
 
@@ -26,7 +26,27 @@ function* runGetShopList(action: ReturnType<typeof getShops.start>) {
 }
 
 export function* watchGetShopList() {
-  yield takeLatest(GET_SHOP_START, runGetShopList);
+  yield takeLatest(GET_SHOPS_START, runGetShopList);
 }
 
-export default watchGetShopList;
+// get shop ...
+function* runGetShop(action: ReturnType<typeof getShop.start>) {
+  const shopId = action.payload.params.shopId;
+  const api = getShopFactory();
+
+  try {
+    const response = yield call(api, shopId);
+    const shopData = response.rest[0];
+
+    const params: GetShop = {
+      shopData: shopData
+    };
+    yield put(getShop.succeed({ shopId }, params));
+  } catch (error) {
+    yield put(getShop.fail({ shopId }, error));
+  }
+}
+
+export function* watchGetShop() {
+  yield takeLatest(GET_SHOP_START, runGetShop);
+}

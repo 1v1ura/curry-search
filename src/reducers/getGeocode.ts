@@ -8,7 +8,7 @@ import {
   GET_GEOCODE_FAIL
 } from "../actions/getGeocode";
 
-export type GeoCodeState = {
+export type GetCodeState = {
   formatted_address: string;
   location: {
     lat: number;
@@ -18,14 +18,14 @@ export type GeoCodeState = {
   error?: AxiosError | null;
 };
 
-export const geoCodeData: Reducer<GeoCodeState, GetGeocodeActionType> = (
-  state: GeoCodeState = {
+export const geoCodeData: Reducer<GetCodeState, GetGeocodeActionType> = (
+  state: GetCodeState = {
     formatted_address: "",
     location: { lat: 0, lng: 0 },
     isLoading: false
   },
   action: GetGeocodeActionType
-): GeoCodeState => {
+): GetCodeState => {
   switch (action.type) {
     case GET_GEOCODE_START:
       return {
