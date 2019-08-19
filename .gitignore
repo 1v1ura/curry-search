@@ -24,3 +24,6 @@ yarn-error.log*
 
 # VS code
 /.history
+
+# ENV
+.env

@@ -22,7 +22,7 @@ export const getGeocodeFactory = (optionConfig?: ApiConfig) => {
     try {
       const response = await instance.get("maps/api/geocode/json", {
         params: {
-          key: "AIzaSyD62509zisYOZ9iuaKz9HMFKpDyJknmEdQ",
+          key: process.env.REACT_APP_GEOCODE_API_KEY,
           address: params.address
         }
       });

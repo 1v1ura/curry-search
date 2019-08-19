@@ -22,7 +22,7 @@ export const getShopsFactory = (optionConfig?: ApiConfig) => {
     try {
       const response = await instance.get("RestSearchAPI/v3/", {
         params: {
-          keyid: "a0d9fd1340a124c229be10a08c8f25c1",
+          keyid: process.env.REACT_APP_GURUNAVI_API_KEY,
           category_l: "RSFST16000",
           hit_per_page: 100,
           latitude: location.lat,
@@ -57,7 +57,7 @@ export const getShopFactory = (optionConfig?: ApiConfig) => {
     try {
       const response = await instance.get("RestSearchAPI/v3/", {
         params: {
-          keyid: "a0d9fd1340a124c229be10a08c8f25c1",
+          keyid: process.env.REACT_APP_GURUNAVI_API_KEY,
           id: shopId
         }
       });
